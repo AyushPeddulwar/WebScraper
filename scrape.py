@@ -58,4 +58,20 @@ def do_hackerone():
         print(op)
     else:
         raise Exception("Query failed to run by returning code of {}. {}".format(request.status_code, request.headers))
+    
+
+do_hackerone()
+
+if(output):
+    try:
+        file = open(output,"w", encoding= "UTF-8")
+        file.write("SecScraper Scan Results at %s" %datetime.datetime.now()+"\n\n")
+        file.write("Query: %s for %s results from %s\n\n" %(query, count, type))
+        file.write(op)
+        file.close()
+        print("Output written to file %s" %output)
+    except FileExistsError:
+        print("Writing to output failed: File already exists")
+    except IOError:
+        print("Writing to file failed. Does the path exists? Check permissions and disk space.")
 
